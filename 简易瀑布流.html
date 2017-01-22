@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="智能社 - zhinengshe.com"/>
+    <meta name="copyright" content="智能社 - zhinengshe.com"/>
+    <title>智能社— http://www.zhinengshe.com</title>
+    <style>
+       *{
+           padding: 0;
+           margin: 0;
+       }
+        li{
+            list-style: none;
+            border: 2px solid #ccc;
+            margin-top:10px;
+        }
+        ul{
+            float: left;
+            width: 300px;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        function rnd(n,m){
+            return parseInt(Math.random()*(m-n)+n);
+        }
+        function createLi(){
+            var oLi=document.createElement('li');
+            oLi.style.height=rnd(100,500)+'px';
+            var r=rnd(0,256);
+            var g=rnd(0,256);
+            var b=rnd(0,256);
+            oLi.style.background='rgb('+r+','+g+','+b+')';
+            return oLi;
+        }
+        window.onload=function(){
+            var aUl=document.getElementsByTagName('ul');
+            function createLi20(){
+               for(var i=0;i<20;i++){
+                   var oLi=createLi();
+                   var arr=[];
+                   for(var j=0;j<aUl.length;j++){
+                       arr[j]=aUl[j];
+                   }
+                   arr.sort(function(ul1,ul2){
+                       return ul1.offsetHeight-ul2.offsetHeight;
+                   });
+                   arr[0].appendChild(oLi);
+               }
+            }
+            createLi20();
+            window.onscroll=function(){
+                var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+                var oC=document.documentElement.clientHeight;
+                var scrollBottom=scrollTop+oC;
+                var scrollHeight=document.documentElement.scrollHeight;
+                if(scrollBottom>=scrollHeight-500){
+                    createLi20();
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+<div id="box">
+    <ul></ul>
+    <ul></ul>
+    <ul></ul>
+</div>
+</body>
+</html>
